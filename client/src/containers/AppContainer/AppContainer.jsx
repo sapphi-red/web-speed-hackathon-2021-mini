@@ -20,7 +20,7 @@ const AppContainer = () => {
   }, [pathname]);
 
   const [activeUser, setActiveUser] = React.useState(null);
-  const { data, isLoading } = useFetch('/api/v1/me', fetchJSON);
+  const { data } = useFetch('/api/v1/me', fetchJSON);
   React.useEffect(() => {
     setActiveUser(data);
   }, [data]);
@@ -29,16 +29,6 @@ const AppContainer = () => {
   const handleRequestOpenAuthModal = React.useCallback(() => setModalType('auth'), []);
   const handleRequestOpenPostModal = React.useCallback(() => setModalType('post'), []);
   const handleRequestCloseModal = React.useCallback(() => setModalType('none'), []);
-
-  React.useEffect(() => {
-    if (isLoading) {
-      document.title = '読込中 - CAwitter'
-    }
-  }, [isLoading])
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <>

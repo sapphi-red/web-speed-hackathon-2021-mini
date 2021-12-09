@@ -53,8 +53,9 @@ const config = {
     ],
   },
   output: {
-    filename: 'scripts/[name].js',
+    filename: 'scripts/[name]-[contenthash:8].js',
     path: DIST_PATH,
+    publicPath: '/'
   },
   plugins: [
     new webpack.EnvironmentPlugin({
@@ -63,10 +64,10 @@ const config = {
       COMMIT_HASH: process.env.SOURCE_VERSION || '',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
+      filename: 'styles/[name]-[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
-      inject: false,
+      inject: true,
       template: path.resolve(SRC_PATH, './index.html'),
     }),
   ],

@@ -6,7 +6,8 @@ import { PostPage } from '../../components/post/PostPage';
 import { useFetch } from '../../hooks/use_fetch';
 import { useInfiniteFetch } from '../../hooks/use_infinite_fetch';
 import { fetchJSON } from '../../utils/fetchers';
-import { NotFoundContainer } from '../NotFoundContainer';
+
+const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
 
 /** @type {React.VFC} */
 const PostContainer = () => {
@@ -25,7 +26,7 @@ const PostContainer = () => {
   }, [isLoadingPost, post])
 
   if (!isLoadingPost && post === null) {
-    return <NotFoundContainer />;
+    return <React.Suspense fallback={<p></p>}><NotFoundContainer /></React.Suspense>;
   }
 
   return (

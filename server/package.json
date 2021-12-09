@@ -11,7 +11,8 @@
     "prestart:clean": "rimraf ../upload",
     "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds",
     "convert:movie": "babel-node --experimental-wasm-threads convert_gif2webm.js",
-    "convert:img": "babel-node convert_jpg2webp.js"
+    "convert:img": "babel-node convert_jpg2webp.js",
+    "generate:sound-meta": "babel-node --experimental-wasm-threads generate_sound_meta.js"
   },
   "dependencies": {
     "@babel/core": "7.16.0",
@@ -37,7 +38,8 @@
     "sharp": "0.29.3",
     "sqlite3": "5.0.2",
     "ulid": "2.3.0",
-    "uuid": "8.3.2"
+    "uuid": "8.3.2",
+    "web-audio-engine": "^0.13.4"
   },
   "devDependencies": {
     "@types/bcrypt": "10.0.28-alpha",

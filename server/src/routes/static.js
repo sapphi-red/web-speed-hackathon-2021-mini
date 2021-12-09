@@ -33,6 +33,12 @@ router.use(
     lastModified: true,
     maxAge: 604800 * 1000,
     immutable: true,
+    setHeaders: (res, path) => {
+      if (serveStatic.mime.lookup(path) === 'text/html') {
+        // Custom Cache-Control for HTML files
+        res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=180')
+      }
+    }
   }),
 );
 

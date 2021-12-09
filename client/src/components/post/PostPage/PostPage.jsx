@@ -14,7 +14,7 @@ const PostPage = ({ comments, post }) => {
   return (
     <>
       <PostItem post={post} />
-      <CommentList comments={comments} />
+      {post && <CommentList comments={comments} />}
     </>
   );
 };

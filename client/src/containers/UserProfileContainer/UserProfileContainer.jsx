@@ -23,11 +23,7 @@ const UserProfileContainer = () => {
     }
   }, [isLoadingUser, user])
 
-  if (isLoadingUser) {
-    return null;
-  }
-
-  if (user === null) {
+  if (!isLoadingUser && user === null) {
     return <NotFoundContainer />;
   }
 

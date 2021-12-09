@@ -24,16 +24,12 @@ const PostContainer = () => {
     }
   }, [isLoadingPost, post])
 
-  if (isLoadingPost) {
-    return null;
-  }
-
-  if (post === null) {
+  if (!isLoadingPost && post === null) {
     return <NotFoundContainer />;
   }
 
   return (
-    <InfiniteScroll fetchMore={fetchMore} items={comments}>
+    <InfiniteScroll fetchMore={fetchMore} items={post ? comments : []}>
       <PostPage comments={comments} post={post} />
     </InfiniteScroll>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';
 import { TimelinePage } from '../../components/timeline/TimelinePage';
@@ -10,11 +9,12 @@ import { fetchJSON } from '../../utils/fetchers';
 const TimelineContainer = () => {
   const { data: posts, fetchMore } = useInfiniteFetch('/api/v1/posts', fetchJSON);
 
+  React.useEffect(() => {
+    document.title = 'タイムライン - CAwitter'
+  }, [])
+
   return (
     <InfiniteScroll fetchMore={fetchMore} items={posts}>
-      <Helmet>
-        <title>タイムライン - CAwitter</title>
-      </Helmet>
       <TimelinePage timeline={posts} />
     </InfiniteScroll>
   );

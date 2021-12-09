@@ -9,7 +9,8 @@
     "prestart": "npm-run-all prestart:clean prestart:init",
     "start": "babel-node --experimental-wasm-threads src/index.js",
     "prestart:clean": "rimraf ../upload",
-    "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds"
+    "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds",
+    "convert:movie": "babel-node --experimental-wasm-threads convert_gif2webm.js"
   },
   "dependencies": {
     "@babel/core": "7.16.0",

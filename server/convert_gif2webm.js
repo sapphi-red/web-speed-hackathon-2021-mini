@@ -24,7 +24,7 @@ const doneFiles = []
 
     const buf = await fetchFile(path.resolve(dir, file))
     ffmpeg.FS('writeFile', 'file', buf)
-    await ffmpeg.run('-i', 'file', '-movflags', 'faststart', '-pix_fmt', 'yuv420p', '-row-mt', '1', newFile)
+    await ffmpeg.run('-i', 'file', '-movflags', 'faststart', '-vf', 'scale=640:-1', '-pix_fmt', 'yuv420p', '-row-mt', '1', newFile)
     const exported = ffmpeg.FS('readFile', newFile)
     await fs.writeFile(path.resolve(dir, `./${newFile}`), exported, 'binary')
     console.log(`outputed: ${newFile}`)

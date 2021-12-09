@@ -13,11 +13,13 @@ const dir = path.resolve(PUBLIC_PATH, './images')
     if (path.extname(file) !== '.jpg') continue
 
     const newFile = `${path.basename(file, '.jpg')}.webp`
+    // const newFile = `${path.basename(file, '.jpg')}-2.webp`
 
     await sharp(path.resolve(dir, file))
       .resize({
         fit: 'contain',
         width: 640,
+        // width: 320,
       })
       // .resize({
       //   fit: 'contain',

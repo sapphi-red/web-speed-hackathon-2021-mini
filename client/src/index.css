@@ -15,3 +15,9 @@ body {
   vertical-align: -0.125em;
   width: 1em;
 }
+
+#app[inert] {
+  user-select: none;
+  pointer-events: none;
+  cursor: default;
+}

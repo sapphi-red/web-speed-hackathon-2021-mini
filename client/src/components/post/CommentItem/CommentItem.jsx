@@ -19,7 +19,7 @@ const CommentItem = ({ comment }) => {
             className="block w-8 h-8 bg-gray-300 border border-gray-300 rounded-full hover:opacity-75 overflow-hidden sm:w-12 sm:h-12"
             to={`/users/${comment.user.username}`}
           >
-            <img alt={comment.user.profileImage.alt} src={getProfileImagePath(comment.user.profileImage.id)} />
+            <img alt={comment.user.profileImage.alt} src={getProfileImagePath(comment.user.profileImage.id)} loading="lazy" />
           </Link>
         </div>
         <div className="flex-grow flex-shrink min-w-0">

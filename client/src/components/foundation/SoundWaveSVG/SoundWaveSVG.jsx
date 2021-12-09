@@ -11,7 +11,7 @@ import { getSoundMetaPath } from '../../../utils/get_path';
  * @type {React.VFC<Props>}
  */
 const SoundWaveSVG = ({ id }) => {
-  return <img className="w-full h-full" src={getSoundMetaPath(id)} />
+  return <img className="w-full h-full" src={getSoundMetaPath(id)} loading="lazy" />
 };
 
 export { SoundWaveSVG };

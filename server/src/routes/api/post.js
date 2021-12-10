@@ -21,6 +21,7 @@ router.get('/posts/:postId', async (req, res) => {
     throw new httpErrors.NotFound();
   }
 
+  res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=180')
   return res.status(200).type('application/json').send(post);
 });
 

@@ -11,7 +11,7 @@
     "prestart:clean": "rimraf ../upload",
     "prestart:init": "mkdirp ../upload/images ../upload/movies ../upload/sounds",
     "convert:movie": "babel-node --experimental-wasm-threads convert_gif2webm.js",
-    "convert:img": "babel-node convert_jpg2webp.js",
+    "convert:img": "babel-node convert_jpg2avif.js",
     "generate:sound-meta": "babel-node --experimental-wasm-threads generate_sound_meta.js"
   },
   "dependencies": {

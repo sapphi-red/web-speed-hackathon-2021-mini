@@ -9,7 +9,7 @@ import { convertImage } from '../../converters/convert_image';
 import { UPLOAD_PATH } from '../../paths';
 
 // 変換した画像の拡張子
-const EXTENSION = 'webp';
+const EXTENSION = 'avif';
 
 const router = Router();
 

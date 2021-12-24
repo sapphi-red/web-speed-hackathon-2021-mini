@@ -1,0 +1,30 @@
+FROM node:16.13.0 AS builder
+
+COPY ./client ./client
+COPY ./package.json ./package.json
+COPY ./yarn.lock ./yarn.lock
+
+ARG COMMIT_HASH
+ENV COMMIT_HASH $COMMIT_HASH
+
+RUN yarn install
+RUN yarn build
+
+FROM node:16.13.0
+
+COPY ./public ./public
+COPY ./server ./server
+COPY ./package.json ./package.json
+COPY ./yarn.lock ./yarn.lock
+COPY --from=builder ./dist ./dist
+
+RUN yarn install
+
+# Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+EXPOSE 3000
+CMD yarn start

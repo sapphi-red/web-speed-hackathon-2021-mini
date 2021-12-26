@@ -1,0 +1,17 @@
+FROM node:16.13.0 AS builder
+
+COPY ./client ./client
+COPY ./package.json ./package.json
+COPY ./yarn.lock ./yarn.lock
+
+ARG COMMIT_HASH
+ENV COMMIT_HASH $COMMIT_HASH
+
+RUN yarn install
+RUN yarn build
+
+FROM caddy:2.4.6
+
+COPY ./public /usr/share/caddy/public
+COPY --from=builder ./dist /usr/share/caddy/dist
+COPY ./Caddyfile /etc/caddy/Caddyfile

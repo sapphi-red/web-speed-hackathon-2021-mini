@@ -1,0 +1,46 @@
+{
+    admin off
+
+    servers :443 {
+        protocol {
+            experimental_http3
+        }
+    }
+}
+
+:80
+
+encode zstd gzip
+
+root * /usr/share/caddy
+file_server {
+    precompressed br gzip
+}
+
+@static-files {
+    not {
+        path /movies/* /images/* /sounds/* /api/*
+    }
+}
+handle @static-files {
+    @immutable {
+        path /scripts/* /styles/*
+    }
+    header @immutable Cache-Control "public, max-age=604800, immutable"
+
+    try_files dist{path} public{path} dist/index.html
+}
+
+@pre-defineds {
+    path /movies/* /images/* /sounds/*
+    file {
+        try_files public{path}
+    }
+}
+handle @pre-defineds {
+    try_files public{path}
+}
+
+handle {
+    reverse_proxy server:3000
+}

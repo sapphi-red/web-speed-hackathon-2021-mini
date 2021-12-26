@@ -1,5 +1,7 @@
 const path = require('path');
+const zlib = require('zlib');
 
+const CompressionPlugin = require('compression-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -69,6 +71,18 @@ const config = {
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(SRC_PATH, './index.html'),
+    }),
+    new CompressionPlugin({
+      filename: '[path][base].br',
+      algorithm: 'brotliCompress',
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: {
+        params: {
+          [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+        },
+      },
+      threshold: 860,
+      minRatio: 1,
     }),
   ],
   resolve: {

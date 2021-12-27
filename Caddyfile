@@ -25,17 +25,17 @@ handle @route-html {
     push * {__MAIN_CSS__}
     rewrite dist/index.html
 
-    header / Link "</api/v1/posts?offset=0&limit=10>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
+    header / Link "</api/v1/posts?offset=0&limit=3>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
 
     @route-html-users {
         path_regexp userID ^/users/(.+)$
     }
-    header @route-html-users Link "</api/v1/users/{re.userID.1}>; rel=preload; as=fetch; crossorigin=anonymous; nopush, </api/v1/users/{re.userID.1}/posts?offset=0&limit=10>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
+    header @route-html-users Link "</api/v1/users/{re.userID.1}>; rel=preload; as=fetch; crossorigin=anonymous; nopush, </api/v1/users/{re.userID.1}/posts?offset=0&limit=3>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
 
     @route-html-posts {
         path_regexp postID ^/posts/(.+)$
     }
-    header @route-html-posts Link "</api/v1/posts/{re.postID.1}>; rel=preload; as=fetch; crossorigin=anonymous; nopush, </api/v1/posts/{re.postID.1}/comments?offset=0&limit=10>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
+    header @route-html-posts Link "</api/v1/posts/{re.postID.1}>; rel=preload; as=fetch; crossorigin=anonymous; nopush, </api/v1/posts/{re.postID.1}/comments?offset=0&limit=3>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
 
     header /terms Link "</fonts/webfont.css>; rel=preload; as=style"
 }

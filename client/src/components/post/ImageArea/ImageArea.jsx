@@ -11,7 +11,7 @@ import { CoveredImage } from '../../foundation/CoveredImage';
  */
 
 /** @type {React.VFC<Props>} */
-const ImageArea = ({ images }) => {
+const ImageArea = ({ images, eager }) => {
   return (
     <AspectRatioBox aspectHeight={9} aspectWidth={16}>
       <div className="grid gap-1 grid-cols-2 grid-rows-2 w-full h-full border border-gray-300 rounded-lg overflow-hidden">
@@ -30,6 +30,7 @@ const ImageArea = ({ images }) => {
               <CoveredImage
                 alt={image.alt}
                 src={getImagePath(image.id, images.length >= 2)}
+                eager={eager && idx === 0}
               >
                 {
                   images.length === 1

@@ -9,7 +9,7 @@ import { Timeline } from '../Timeline';
 
 /** @type {React.VFC<Props>} */
 const TimelinePage = ({ timeline }) => {
-  return <Timeline timeline={timeline} />;
+  return <Timeline timeline={timeline} eager />;
 };
 
 export { TimelinePage };

@@ -15,7 +15,7 @@ const UserProfilePage = ({ timeline, user }) => {
     <>
       <UserProfileHeader user={user} />
       <div className="mt-6 border-t border-gray-300">
-        <Timeline timeline={timeline} />
+        <Timeline timeline={timeline} eager />
       </div>
     </>
   );

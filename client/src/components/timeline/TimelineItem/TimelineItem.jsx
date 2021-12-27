@@ -32,7 +32,7 @@ const isClickedAnchorOrButton = (target, currentTarget) => {
  */
 
 /** @type {React.VFC<Props>} */
-const TimelineItem = ({ post }) => {
+const TimelineItem = ({ post, eager }) => {
   const navigate = useNavigate();
 
   /**
@@ -78,7 +78,7 @@ const TimelineItem = ({ post }) => {
           <p className="text-gray-800 leading-relaxed">{post.text}</p>
           {post.images?.length > 0 ? (
             <div className="relative mt-2 w-full">
-              <ImageArea images={post.images} />
+              <ImageArea images={post.images} eager={eager} />
             </div>
           ) : null}
           {post.movie ? (

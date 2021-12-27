@@ -8,11 +8,11 @@ import { TimelineItem } from '../TimelineItem';
  */
 
 /** @type {React.VFC<Props>} */
-const Timeline = ({ timeline }) => {
+const Timeline = ({ timeline, eager }) => {
   return (
     <section>
-      {timeline.map((post) => {
-        return <TimelineItem key={post.id} post={post} />;
+      {timeline.map((post, idx) => {
+        return <TimelineItem key={post.id} post={post} eager={eager && idx === 0} />;
       })}
     </section>
   );

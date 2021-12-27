@@ -63,7 +63,7 @@ const PostItem = ({ post }) => {
           <p className="text-gray-800 text-xl leading-relaxed">{post?.text ?? '　'}</p>
           {post?.images?.length > 0 ? (
             <div className="relative mt-2 w-full">
-              <ImageArea images={post.images} />
+              <ImageArea images={post.images} eager />
             </div>
           ) : null}
           {post?.movie ? (

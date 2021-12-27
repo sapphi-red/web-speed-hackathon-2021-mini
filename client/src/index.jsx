@@ -10,3 +10,10 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('app'),
 );
+
+requestIdleCallback(() => {
+  const $font = document.createElement('link')
+  $font.rel = 'stylesheet'
+  $font.href = '/fonts/webfont.css'
+  document.head.append($font)
+})

@@ -36,6 +36,8 @@ handle @route-html {
         path_regexp postID ^/posts/(.+)$
     }
     header @route-html-posts Link "</api/v1/posts/{re.postID.1}>; rel=preload; as=fetch; crossorigin=anonymous; nopush, </api/v1/posts/{re.postID.1}/comments?offset=0&limit=10>; rel=preload; as=fetch; crossorigin=anonymous; nopush"
+
+    header /terms Link "</fonts/webfont.css>; rel=preload; as=style"
 }
 
 @static-files {

@@ -14,12 +14,14 @@ FROM node:16.13.0
 
 WORKDIR /usr/src/app
 
-COPY ./server ./server
 COPY ./package.json ./package.json
 COPY ./yarn.lock ./yarn.lock
-COPY --from=builder ./dist/index.html ./dist/index.html
+COPY ./server/package.json ./server/package.json
 
 RUN yarn install
+
+COPY --from=builder ./dist/index.html ./dist/index.html
+COPY ./server ./server
 
 # Tini
 ENV TINI_VERSION v0.19.0

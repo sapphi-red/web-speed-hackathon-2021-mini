@@ -15,3 +15,6 @@ FROM caddy:2.4.6
 COPY ./public /usr/share/caddy/public
 COPY --from=builder ./dist /usr/share/caddy/dist
 COPY ./Caddyfile /etc/caddy/Caddyfile
+
+RUN sed -i -e "s/{__MAIN_JS__}/$(ls /usr/share/caddy/dist/scripts/main-*.js | sed -e 's/\/usr\/share\/caddy\/dist//' | sed -e 's/\//\\\//g')/g" /etc/caddy/Caddyfile
+RUN sed -i -e "s/{__MAIN_CSS__}/$(ls /usr/share/caddy/dist/styles/main-*.css | sed -e 's/\/usr\/share\/caddy\/dist//' | sed -e 's/\//\\\//g')/g" /etc/caddy/Caddyfile

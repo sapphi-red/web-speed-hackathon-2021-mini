@@ -36,19 +36,22 @@ const getPeakRatiosFromAudioBuffer = buffer => {
   const peaks = chunks.map(mean);
   // chunk の平均の中から最大値を取る
   const max = Math.max(...peaks);
-  const ratios = peaks.map(peak => peak / max)
+  const ratios = peaks.map(peak => Math.round(peak / max * 1000) / 1000)
   return ratios
 }
 
 const createSvgTextFromPeakRatios = ratios => {
   let text = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 1">'
   for (const [i, ratio] of ratios.entries()) {
+    const ratioStr = ('' + ratio).slice(0, 5)
+    const ratio1Str = ('' + (1-ratio)).slice(0, 5)
+
     text += '<rect '+
       'fill="#2563EB" '+
-      `height="${ratio}" `+
+      `height="${ratioStr}" `+
       'width="1" '+
       `x="${i}" `+
-      `y="${1 - ratio}"`+
+      `y="${ratio1Str}"`+
       '/>'
   }
   text += '</svg>'

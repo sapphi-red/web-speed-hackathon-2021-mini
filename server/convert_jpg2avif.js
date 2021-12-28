@@ -17,9 +17,11 @@ const dir = path.resolve(PUBLIC_PATH, './images')
 
     await sharp(path.resolve(dir, file))
       .resize({
-        fit: 'contain',
+        fit: 'cover',
         width: 640,
-        // width: 320,
+        // width: 300,
+        height: 340,
+        position: 'center',
       })
       // .resize({
       //   fit: 'contain',
@@ -27,7 +29,11 @@ const dir = path.resolve(PUBLIC_PATH, './images')
       //   position: 'top',
       //   withoutEnlargement: true
       // })
-      .toFormat('avif')
+      .toFormat('avif', {
+        quality: 40,
+        speed: 0,
+        chromaSubsampling: '4:2:0',
+      })
       .toFile(path.resolve(dir, `./${newFile}`))
 
     console.log(`outputed: ${newFile}`)

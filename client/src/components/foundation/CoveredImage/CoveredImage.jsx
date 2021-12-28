@@ -10,7 +10,7 @@ import React from 'react';
  * アスペクト比を維持したまま、要素のコンテンツボックス全体を埋めるように画像を拡大縮小します
  * @type {React.VFC<Props>}
  */
-const CoveredImage = ({ alt, src, children, eager }) => {
+const CoveredImage = ({ alt, src, children }) => {
   return (
     <picture className="w-full h-full overflow-hidden">
       {children}
@@ -18,7 +18,6 @@ const CoveredImage = ({ alt, src, children, eager }) => {
         alt={alt}
         className="w-full h-full max-w-none object-cover"
         src={src}
-        loading={eager ? null : 'lazy'}
       />
     </picture>
   );

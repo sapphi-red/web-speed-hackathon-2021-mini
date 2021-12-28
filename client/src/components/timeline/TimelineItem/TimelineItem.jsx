@@ -6,6 +6,7 @@ import { formatDate } from '../../../utils/date';
 import { ImageArea } from '../../post/ImageArea';
 import { MovieArea } from '../../post/MovieArea';
 import { SoundArea } from '../../post/SoundArea';
+import { LazyLoadImage } from '../../foundation/LazyLoadImage';
 
 /**
  * @param {Element} target
@@ -57,7 +58,7 @@ const TimelineItem = ({ post, eager }) => {
             className="block w-12 h-12 bg-gray-300 border border-gray-300 rounded-full hover:opacity-75 overflow-hidden sm:w-16 sm:h-16"
             to={`/users/${post.user.username}`}
           >
-            <img alt={post.user.profileImage.alt} src={getProfileImagePath(post.user.profileImage.id)} loading="lazy" />
+            <LazyLoadImage alt={post.user.profileImage.alt} src={getProfileImagePath(post.user.profileImage.id)} eager={eager} loading="lazy" />
           </Link>
         </div>
         <div className="flex-grow flex-shrink min-w-0">
@@ -83,12 +84,12 @@ const TimelineItem = ({ post, eager }) => {
           ) : null}
           {post.movie ? (
             <div className="relative mt-2 w-full">
-              <MovieArea movie={post.movie} />
+              <MovieArea movie={post.movie} eager={eager} />
             </div>
           ) : null}
           {post.sound ? (
             <div className="relative mt-2 w-full">
-              <SoundArea sound={post.sound} />
+              <SoundArea sound={post.sound} eager={eager} />
             </div>
           ) : null}
         </div>

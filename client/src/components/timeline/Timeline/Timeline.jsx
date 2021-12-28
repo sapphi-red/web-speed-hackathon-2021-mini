@@ -12,7 +12,7 @@ const Timeline = ({ timeline, eager }) => {
   return (
     <section>
       {timeline.map((post, idx) => {
-        return <TimelineItem key={post.id} post={post} eager={eager && idx === 0} />;
+        return <TimelineItem key={post.id} post={post} eager={eager && idx < 3} />;
       })}
     </section>
   );

@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '../FontAwesomeIcon';
  * クリックすると再生・一時停止を切り替えます。
  * @type {React.VFC<Props>}
  */
-const PausableMovie = ({ src }) => {
+const PausableMovie = ({ src, eager }) => {
   /** @type {React.RefObject<HTMLVideoElement>} */
   const videoRef = React.useRef(null);
 
@@ -33,7 +33,7 @@ const PausableMovie = ({ src }) => {
   }, []);
 
   return (
-    <AspectRatioBox aspectHeight={1} aspectWidth={1}>
+    <AspectRatioBox aspectHeight={1} aspectWidth={1} eager={eager}>
       <button className="group relative block w-full h-full" onClick={handleClick} type="button">
         <video src={src} ref={videoRef} className="w-full" muted autoPlay={!prefersReducedMotion} loop />
         <div

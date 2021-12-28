@@ -14,7 +14,7 @@ import { SoundWaveSVG } from '../SoundWaveSVG';
 /**
  * @type {React.VFC<Props>}
  */
-const SoundPlayer = ({ sound }) => {
+const SoundPlayer = ({ sound, eager }) => {
   const [currentTimeRatio, setCurrentTimeRatio] = React.useState(0);
   /** @type {React.ReactEventHandler<HTMLAudioElement>} */
   const handleTimeUpdate = React.useCallback((ev) => {
@@ -52,7 +52,7 @@ const SoundPlayer = ({ sound }) => {
         <p className="whitespace-nowrap text-sm font-bold overflow-hidden overflow-ellipsis">{sound.title}</p>
         <p className="text-gray-500 whitespace-nowrap text-sm overflow-hidden overflow-ellipsis">{sound.artist}</p>
         <div className="pt-2">
-          <AspectRatioBox aspectHeight={1} aspectWidth={10}>
+          <AspectRatioBox aspectHeight={1} aspectWidth={10} eager={eager}>
             <div className="relative w-full h-full">
               <div className="absolute inset-0 w-full h-full">
                 <SoundWaveSVG id={sound.id} />

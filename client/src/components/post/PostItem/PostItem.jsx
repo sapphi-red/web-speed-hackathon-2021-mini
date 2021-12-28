@@ -68,12 +68,12 @@ const PostItem = ({ post }) => {
           ) : null}
           {post?.movie ? (
             <div className="relative mt-2 w-full">
-              <MovieArea movie={post.movie} />
+              <MovieArea movie={post.movie} eager />
             </div>
           ) : null}
           {post?.sound ? (
             <div className="relative mt-2 w-full">
-              <SoundArea sound={post.sound} />
+              <SoundArea sound={post.sound} eager />
             </div>
           ) : null}
           {post && (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import Router from 'preact-router';
 
 import { AppPage } from '../../components/application/AppPage';
 import { useFetch } from '../../hooks/use_fetch';
@@ -17,10 +17,9 @@ const NewPostModalContainer = React.lazy(() => import('../NewPostModalContainer'
 
 /** @type {React.VFC} */
 const AppContainer = () => {
-  const { pathname } = useLocation();
-  React.useEffect(() => {
+  const onRouteChange = React.useCallback(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  })
 
   const [activeUser, setActiveUser] = React.useState(null);
   const { data } = useFetch('/api/v1/me', fetchJSON);
@@ -40,13 +39,13 @@ const AppContainer = () => {
         onRequestOpenAuthModal={handleRequestOpenAuthModal}
         onRequestOpenPostModal={handleRequestOpenPostModal}
       >
-        <Routes>
-          <Route element={<TimelineContainer />} path="/" />
-          <Route element={<UserProfileContainer />} path="/users/:username" />
-          <Route element={<PostContainer />} path="/posts/:postId" />
-          <Route element={<TermContainer />} path="/terms" />
-          <Route element={<React.Suspense fallback={<p></p>}><NotFoundContainer /></React.Suspense>} path="*" />
-        </Routes>
+        <Router onChange={onRouteChange}>
+          <TimelineContainer path="/" />
+          <UserProfileContainer path="/users/:username" />
+          <PostContainer path="/posts/:postId" />
+          <TermContainer path="/terms" />
+          <React.Suspense fallback={<p></p>} default><NotFoundContainer /></React.Suspense>
+        </Router>
       </AppPage>
 
       {modalType === 'auth' ? (

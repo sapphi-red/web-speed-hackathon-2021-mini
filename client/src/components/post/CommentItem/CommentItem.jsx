@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'preact-router/match';
 
 import { LazyLoadImage } from '../../foundation/LazyLoadImage';
 import { getProfileImagePath } from '../../../utils/get_path';
@@ -25,10 +25,10 @@ const CommentItem = ({ comment }) => {
         </div>
         <div className="flex-grow flex-shrink min-w-0">
           <p className="whitespace-nowrap text-xs overflow-hidden overflow-ellipsis">
-            <Link className="pr-1 text-gray-800 hover:underline font-bold" to={`/users/${comment.user.username}`}>
+            <Link className="pr-1 text-gray-800 hover:underline font-bold" href={`/users/${comment.user.username}`}>
               {comment.user.name}
             </Link>
-            <Link className="pr-1 text-gray-500 hover:underline" to={`/users/${comment.user.username}`}>
+            <Link className="pr-1 text-gray-500 hover:underline" href={`/users/${comment.user.username}`}>
               @{comment.user.username}
             </Link>
           </p>

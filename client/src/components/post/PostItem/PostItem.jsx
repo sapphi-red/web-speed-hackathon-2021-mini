@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'preact-router/match';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { formatDate } from '../../../utils/date';
@@ -78,7 +78,7 @@ const PostItem = ({ post }) => {
           ) : null}
           {post && (
             <p className="mt-2 text-sm sm:mt-4">
-              <Link className="text-gray-500 hover:underline" to={`/posts/${post.id}`}>
+              <Link className="text-gray-500 hover:underline" href={`/posts/${post.id}`}>
                 <time dateTime={new Date(post.createdAt).toISOString()}>
                   {formatDate(post.createdAt)}
                 </time>

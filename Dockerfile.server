@@ -1,6 +1,7 @@
 FROM node:16.13.0 AS builder
 
 COPY ./client ./client
+COPY ./patches ./patches
 COPY ./package.json ./package.json
 COPY ./yarn.lock ./yarn.lock
 

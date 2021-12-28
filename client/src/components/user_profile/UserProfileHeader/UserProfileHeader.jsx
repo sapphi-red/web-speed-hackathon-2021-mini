@@ -1,5 +1,5 @@
 import FastAverageColor from 'fast-average-color';
-import React from 'react';
+import { useCallback, useState } from 'preact/hooks';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 import { getProfileImagePath } from '../../../utils/get_path';
@@ -13,11 +13,11 @@ import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 
 /** @type {React.VFC<Props>} */
 const UserProfileHeader = ({ user }) => {
-  const [averageColor, setAverageColor] = React.useState(null);
+  const [averageColor, setAverageColor] = useState(null);
 
   // 画像の平均色を取得します
   /** @type {React.ReactEventHandler<HTMLImageElement>} */
-  const handleLoadImage = React.useCallback((ev) => {
+  const handleLoadImage = useCallback((ev) => {
     const fac = new FastAverageColor();
     const { rgb } = fac.getColor(ev.currentTarget, { mode: 'precision' });
     setAverageColor(rgb);

@@ -1,5 +1,7 @@
-import React from 'react';
+import { Fragment } from 'preact'
+import { useCallback, useState, useEffect } from 'preact/hooks';
 import Router from 'preact-router';
+import lazy from 'preact-lazy';
 
 import { AppPage } from '../../components/application/AppPage';
 import { useFetch } from '../../hooks/use_fetch';
@@ -10,30 +12,30 @@ import TermContainer from '../TermContainer';
 import TimelineContainer from '../TimelineContainer';
 import UserProfileContainer from '../UserProfileContainer';
 
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'));
 
-const AuthModalContainer = React.lazy(() => import('../AuthModalContainer'));
-const NewPostModalContainer = React.lazy(() => import('../NewPostModalContainer'));
+const AuthModalContainer = lazy(() => import('../AuthModalContainer'));
+const NewPostModalContainer = lazy(() => import('../NewPostModalContainer'));
 
 /** @type {React.VFC} */
 const AppContainer = () => {
-  const onRouteChange = React.useCallback(() => {
+  const onRouteChange = useCallback(() => {
     window.scrollTo(0, 0);
-  })
+  }, [])
 
-  const [activeUser, setActiveUser] = React.useState(null);
+  const [activeUser, setActiveUser] = useState(null);
   const { data } = useFetch('/api/v1/me', fetchJSON);
-  React.useEffect(() => {
+  useEffect(() => {
     setActiveUser(data);
   }, [data]);
 
-  const [modalType, setModalType] = React.useState('none');
-  const handleRequestOpenAuthModal = React.useCallback(() => setModalType('auth'), []);
-  const handleRequestOpenPostModal = React.useCallback(() => setModalType('post'), []);
-  const handleRequestCloseModal = React.useCallback(() => setModalType('none'), []);
+  const [modalType, setModalType] = useState('none');
+  const handleRequestOpenAuthModal = useCallback(() => setModalType('auth'), []);
+  const handleRequestOpenPostModal = useCallback(() => setModalType('post'), []);
+  const handleRequestCloseModal = useCallback(() => setModalType('none'), []);
 
   return (
-    <>
+    <Fragment>
       <AppPage
         activeUser={activeUser}
         onRequestOpenAuthModal={handleRequestOpenAuthModal}
@@ -44,15 +46,15 @@ const AppContainer = () => {
           <UserProfileContainer path="/users/:username" />
           <PostContainer path="/posts/:postId" />
           <TermContainer path="/terms" />
-          <React.Suspense fallback={<p></p>} default><NotFoundContainer /></React.Suspense>
+          <NotFoundContainer default />
         </Router>
       </AppPage>
 
       {modalType === 'auth' ? (
-        <React.Suspense fallback={<p></p>}><AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} /></React.Suspense>
+        <AuthModalContainer onRequestCloseModal={handleRequestCloseModal} onUpdateActiveUser={setActiveUser} />
       ) : null}
-      {modalType === 'post' ? <React.Suspense fallback={<p></p>}><NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /></React.Suspense> : null}
-    </>
+      {modalType === 'post' ? <NewPostModalContainer onRequestCloseModal={handleRequestCloseModal} /> : null}
+    </Fragment>
   );
 };
 

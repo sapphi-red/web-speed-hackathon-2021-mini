@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getSoundMetaPath } from '../../../utils/get_path';
 
 /**

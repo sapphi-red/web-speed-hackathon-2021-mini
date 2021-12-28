@@ -1,4 +1,3 @@
-import React from 'react';
 import { faSignInAlt, faEdit, faUser, faHome, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';

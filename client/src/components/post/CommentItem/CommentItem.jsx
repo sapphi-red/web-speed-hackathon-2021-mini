@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'preact-router/match';
 
 import { LazyLoadImage } from '../../foundation/LazyLoadImage';

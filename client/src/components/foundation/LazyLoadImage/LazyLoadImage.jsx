@@ -1,9 +1,9 @@
-import React from 'react';
+import { useRef } from 'preact/hooks';
 
 import { useHasIntersected } from '../../../hooks/use_has_intersected'
 
 const LazyLoadImage = ({ src, eager, ...props }) => {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const hasIntersected = useHasIntersected(ref)
 
   return (

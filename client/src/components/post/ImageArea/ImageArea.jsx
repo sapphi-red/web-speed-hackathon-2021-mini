@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import { getImagePath } from '../../../utils/get_path';
 import { AspectRatioBox } from '../../foundation/AspectRatioBox';

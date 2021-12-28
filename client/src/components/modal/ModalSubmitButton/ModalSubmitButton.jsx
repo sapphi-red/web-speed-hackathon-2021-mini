@@ -1,6 +1,5 @@
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
-import React from 'react';
 
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 

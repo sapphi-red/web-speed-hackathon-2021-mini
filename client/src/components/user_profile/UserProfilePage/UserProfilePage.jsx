@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'preact'
 
 import { Timeline } from '../../timeline/Timeline';
 import { UserProfileHeader } from '../UserProfileHeader';
@@ -12,12 +12,12 @@ import { UserProfileHeader } from '../UserProfileHeader';
 /** @type {React.VFC<Props>} */
 const UserProfilePage = ({ timeline, user }) => {
   return (
-    <>
+    <Fragment>
       <UserProfileHeader user={user} />
       <div className="mt-6 border-t border-gray-300">
         <Timeline timeline={timeline} eager />
       </div>
-    </>
+    </Fragment>
   );
 };
 

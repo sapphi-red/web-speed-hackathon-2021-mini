@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getMoviePath } from '../../../utils/get_path';
 import { PausableMovie } from '../../foundation/PausableMovie';
 

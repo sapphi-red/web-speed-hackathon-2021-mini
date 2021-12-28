@@ -1,4 +1,5 @@
-import React from 'react';
+import { useEffect } from 'preact/hooks';
+import lazy from 'preact-lazy';
 
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';
 import { PostPage } from '../../components/post/PostPage';
@@ -6,7 +7,8 @@ import { useFetch } from '../../hooks/use_fetch';
 import { useInfiniteFetch } from '../../hooks/use_infinite_fetch';
 import { fetchJSON } from '../../utils/fetchers';
 
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const Loading = () => <p>Loading...</p>
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'), Loading);
 
 /** @type {React.VFC} */
 const PostContainer = ({ postId }) => {
@@ -15,7 +17,7 @@ const PostContainer = ({ postId }) => {
 
   const { data: comments, fetchMore } = useInfiniteFetch(`/api/v1/posts/${postId}/comments`, fetchJSON);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoadingPost) {
       document.title = '読込中 - CAwitter'
     } else if (post !== null) {
@@ -24,7 +26,7 @@ const PostContainer = ({ postId }) => {
   }, [isLoadingPost, post])
 
   if (!isLoadingPost && post === null) {
-    return <React.Suspense fallback={<p></p>}><NotFoundContainer /></React.Suspense>;
+    return <NotFoundContainer />;
   }
 
   return (

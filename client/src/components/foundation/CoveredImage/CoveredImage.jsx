@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * @typedef {object} Props
  * @property {string} alt

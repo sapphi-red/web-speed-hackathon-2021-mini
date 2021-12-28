@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect } from 'preact/hooks';
+import Portal from 'preact-portal';
 
 /**
  * @typedef {object} Props
@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 /** @type {React.VFC<Props>} */
 const Modal = ({ children, onRequestCloseModal }) => {
   // overflow: hidden を付与して、スクロールできないようにする
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style.setProperty('overflow', 'hidden');
     return () => {
       document.body.style.removeProperty('overflow');
@@ -18,7 +18,7 @@ const Modal = ({ children, onRequestCloseModal }) => {
   }, []);
 
   // inert 属性を #app に付与して、アプリケーションが操作できないようにする
-  React.useEffect(() => {
+  useEffect(() => {
     document.getElementById('app').inert = true;
     return () => {
       document.getElementById('app').inert = false;
@@ -26,7 +26,7 @@ const Modal = ({ children, onRequestCloseModal }) => {
   }, []);
 
   // Escape キーを入力すると、モーダルを閉じる
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = (ev) => {
       if (ev.key === 'Escape') {
         onRequestCloseModal();
@@ -36,16 +36,17 @@ const Modal = ({ children, onRequestCloseModal }) => {
     return () => document.removeEventListener('keyup', handler);
   }, [onRequestCloseModal]);
 
-  return ReactDOM.createPortal(
-    <div className="fixed z-10 bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="absolute bottom-0 left-0 right-0 top-0" onClick={onRequestCloseModal}></div>
-      <div className="flex flex-col items-center justify-center px-2 w-full h-4/6">
-        <div className="relative px-2 py-8 w-full max-w-md max-h-full bg-white rounded">
-          <div className="relative w-full max-h-full overflow-auto">{children}</div>
+  return (
+    <Portal into="#modal">
+      <div className="fixed z-10 bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="absolute bottom-0 left-0 right-0 top-0" onClick={onRequestCloseModal}></div>
+        <div className="flex flex-col items-center justify-center px-2 w-full h-4/6">
+          <div className="relative px-2 py-8 w-full max-w-md max-h-full bg-white rounded">
+            <div className="relative w-full max-h-full overflow-auto">{children}</div>
+          </div>
         </div>
       </div>
-    </div>,
-    document.getElementById('modal'),
+    </Portal>
   );
 };
 

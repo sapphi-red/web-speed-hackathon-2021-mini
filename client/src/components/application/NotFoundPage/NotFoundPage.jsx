@@ -1,5 +1,3 @@
-import React from 'react';
-
 /** @type {React.VFC} */
 const NotFoundPage = () => {
   return (

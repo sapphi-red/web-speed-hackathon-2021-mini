@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import React from 'react';
 
 /**
  * @typedef {object} Props
  * @property {string} accept
  * @property {boolean} active
  * @property {React.ReactNode} icon
- * @property {React.ChangeEventHandler<HTMLInputElement>} onChange
+ * @property {React.ChangeEventHandler<HTMLInputElement>} onInput
  */
 
 /** @type {React.VFC<Props>} */
-const AttachFileInputButton = ({ accept, active, icon, onChange }) => {
+const AttachFileInputButton = ({ accept, active, icon, onInput }) => {
   return (
     <label className="relative flex items-center justify-center focus-within:outline-black cursor-pointer">
       <span
@@ -21,7 +20,7 @@ const AttachFileInputButton = ({ accept, active, icon, onChange }) => {
       >
         {icon}
       </span>
-      <input multiple accept={accept} className="sr-only" onChange={onChange} type="file" />
+      <input multiple accept={accept} className="sr-only" onInput={onInput} type="file" />
     </label>
   );
 };

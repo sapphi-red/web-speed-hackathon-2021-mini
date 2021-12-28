@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback, useState } from 'preact/hooks';
 import { route } from 'preact-router';
 
 import { Modal } from '../../components/modal/Modal';
@@ -31,14 +31,14 @@ async function sendNewPost({ images, movie, sound, text }) {
 
 /** @type {React.VFC<Props>} */
 const NewPostModalContainer = ({ onRequestCloseModal }) => {
-  const [hasError, setHasError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleResetError = React.useCallback(() => {
+  const handleResetError = useCallback(() => {
     setHasError(false);
   }, []);
 
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     async (params) => {
       try {
         setIsLoading(true);

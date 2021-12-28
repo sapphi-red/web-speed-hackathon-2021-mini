@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'preact/hooks';
 
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';
 import { TimelinePage } from '../../components/timeline/TimelinePage';
@@ -9,7 +9,7 @@ import { fetchJSON } from '../../utils/fetchers';
 const TimelineContainer = () => {
   const { data: posts, fetchMore } = useInfiniteFetch('/api/v1/posts', fetchJSON);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = 'タイムライン - CAwitter'
   }, [])
 

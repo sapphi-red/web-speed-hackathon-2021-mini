@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { Fragment } from 'preact'
 import { Link } from 'preact-router/match';
 
 import { getProfileImagePath } from '../../../utils/get_path';
@@ -43,7 +43,7 @@ const PostItem = ({ post }) => {
           <div className="flex-grow flex-shrink min-w-0 whitespace-nowrap overflow-hidden overflow-ellipsis">
             {
               post && (
-                <>
+                <Fragment>
                   <p>
                     <Link className="text-gray-800 hover:underline font-bold" to={`/users/${post.user.username}`}>
                       {post.user.name}
@@ -54,7 +54,7 @@ const PostItem = ({ post }) => {
                       @{post.user.username}
                     </Link>
                   </p>
-                </>
+                </Fragment>
               )
             }
           </div>

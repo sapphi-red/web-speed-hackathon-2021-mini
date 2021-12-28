@@ -1,10 +1,10 @@
-import React from 'react';
+import { useEffect } from 'preact/hooks';
 
 import { NotFoundPage } from '../../components/application/NotFoundPage';
 
 /** @type {React.VFC} */
 const NotFoundContainer = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = 'ページが見つかりません - CAwitter'
   }, [])
 

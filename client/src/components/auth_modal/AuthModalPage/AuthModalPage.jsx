@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'preact/hooks'
 import { Link } from 'preact-router/match';
 
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
@@ -25,9 +25,9 @@ import { AuthInput } from '../AuthInput';
 /** @type {React.VFC<Props>} */
 const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError, onSubmit }) => {
   /** @type {[SubmitParams, (params: SubmitParams) => SubmitParams]} */
-  const [params, setParams] = React.useState({ name: '', password: '', type: 'signin', username: '' });
+  const [params, setParams] = useState({ name: '', password: '', type: 'signin', username: '' });
 
-  const handleToggleType = React.useCallback(() => {
+  const handleToggleType = useCallback(() => {
     onResetError();
     setParams((params) => ({
       ...params,
@@ -36,7 +36,7 @@ const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError,
   }, [onResetError]);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeUsername = React.useCallback((ev) => {
+  const handleChangeUsername = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({
       ...params,
@@ -45,7 +45,7 @@ const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError,
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeName = React.useCallback((ev) => {
+  const handleChangeName = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({
       ...params,
@@ -54,7 +54,7 @@ const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError,
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangePassword = React.useCallback((ev) => {
+  const handleChangePassword = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({
       ...params,
@@ -63,7 +63,7 @@ const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError,
   }, []);
 
   /** @type {React.FormEventHandler<HTMLFormElement>} */
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     (ev) => {
       ev.preventDefault();
       onResetError();
@@ -85,18 +85,18 @@ const AuthModalPage = ({ hasError, isLoading, onRequestCloseModal, onResetError,
           </button>
         </p>
         <div className="mt-8">
-          <AuthInput label="ユーザー名" onChange={handleChangeUsername} type="text" />
+          <AuthInput label="ユーザー名" onInput={handleChangeUsername} type="text" />
         </div>
         {params.type === 'signup' ? (
           <div className="mt-4">
-            <AuthInput label="名前" onChange={handleChangeName} type="text" />
+            <AuthInput label="名前" onInput={handleChangeName} type="text" />
           </div>
         ) : null}
         <div className="mt-4">
           <AuthInput
             autoComplete={params.type === 'signup' ? 'new-password' : 'current-password'}
             label="パスワード"
-            onChange={handleChangePassword}
+            onInput={handleChangePassword}
             type="password"
           />
         </div>

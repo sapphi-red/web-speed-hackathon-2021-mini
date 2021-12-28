@@ -1,14 +1,14 @@
-import React from 'react';
+import { useEffect, useState, useRef } from 'preact/hooks';
 
 export const useHasIntersected = ref => {
-  const [hasIntersected, setHasIntersected] = React.useState(false);
-  const observer = React.useRef(null);
+  const [hasIntersected, setHasIntersected] = useState(false);
+  const observer = useRef(null);
 
   const cleanOb = () => {
     observer.current?.disconnect()
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!ref.current) return
     cleanOb()
 

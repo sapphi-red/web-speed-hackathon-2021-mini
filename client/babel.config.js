@@ -9,11 +9,17 @@ module.exports = {
       },
     ],
     [
-      '@babel/preset-react',
+      'preact'
+    ],
+  ],
+  plugins: [
+    [
+      '@emotion/babel-plugin-jsx-pragmatic',
       {
-        development: process.env.BABEL_ENV === "development",
-        useSpread: true,
-      },
+        module: 'preact',
+        import: 'h',
+        export: 'h',
+      }
     ],
   ],
 };

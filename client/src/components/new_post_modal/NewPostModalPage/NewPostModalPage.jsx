@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'preact/hooks';
 import { faImages, faMusic, faVideo } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
@@ -27,12 +27,12 @@ const MAX_UPLOAD_BYTES_LIMIT = 10 * 1024 * 1024;
 /** @type {React.VFC<Props>} */
 const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   /** @type {[SubmitParams, (params: SubmitParams) => SubmitParams]} */
-  const [params, setParams] = React.useState({ images: [], movie: undefined, sound: undefined, text: '' });
+  const [params, setParams] = useState({ images: [], movie: undefined, sound: undefined, text: '' });
 
-  const [hasFileError, setHasFileError] = React.useState(false);
+  const [hasFileError, setHasFileError] = useState(false);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeText = React.useCallback((ev) => {
+  const handleChangeText = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({
       ...params,
@@ -41,7 +41,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeImages = React.useCallback((ev) => {
+  const handleChangeImages = useCallback((ev) => {
     const files = Array.from(ev.currentTarget.files).slice(0, 4);
     const isValid = files.every((file) => file.size <= MAX_UPLOAD_BYTES_LIMIT);
 
@@ -57,7 +57,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeSound = React.useCallback((ev) => {
+  const handleChangeSound = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -73,7 +73,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeMovie = React.useCallback((ev) => {
+  const handleChangeMovie = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -89,7 +89,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.FormEventHandler<HTMLFormElement>} */
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     (ev) => {
       ev.preventDefault();
       onResetError();
@@ -103,7 +103,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
       <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
         <textarea
           className="placeholder-gray-300 p-4 w-full h-24 border border-gray-300 rounded resize-none"
-          onChange={handleChangeText}
+          onInput={handleChangeText}
           placeholder="いまなにしてる？"
         />
         <p className="flex items-center justify-evenly mt-4 w-full text-gray-900">
@@ -111,19 +111,19 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
             accept="image/*"
             active={params.images.length !== 0}
             icon={<FontAwesomeIcon icon={faImages} />}
-            onChange={handleChangeImages}
+            onInput={handleChangeImages}
           />
           <AttachFileInputButton
             accept="audio/*"
             active={params.sound !== undefined}
             icon={<FontAwesomeIcon icon={faMusic} />}
-            onChange={handleChangeSound}
+            onInput={handleChangeSound}
           />
           <AttachFileInputButton
             accept="video/*"
             active={params.movie !== undefined}
             icon={<FontAwesomeIcon icon={faVideo} />}
-            onChange={handleChangeMovie}
+            onInput={handleChangeMovie}
           />
         </p>
         <p className="mt-4">

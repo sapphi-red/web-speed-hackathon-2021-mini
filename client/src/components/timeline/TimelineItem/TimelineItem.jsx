@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'preact/hooks';
 import { route } from 'preact-router';
 import { Link } from 'preact-router/match';
 
@@ -39,7 +39,7 @@ const TimelineItem = ({ post, eager }) => {
    * ボタンやリンク以外の箇所をクリックしたとき かつ 文字が選択されてないとき、投稿詳細ページに遷移する
    * @type {React.MouseEventHandler}
    */
-  const handleClick = React.useCallback(
+  const handleClick = useCallback(
     (ev) => {
       const isSelectedText = document.getSelection().isCollapsed === false;
       if (!isClickedAnchorOrButton(ev.target, ev.currentTarget) && !isSelectedText) {

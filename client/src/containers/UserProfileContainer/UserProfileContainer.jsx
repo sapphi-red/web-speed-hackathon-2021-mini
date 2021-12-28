@@ -1,4 +1,5 @@
-import React from 'react';
+import { useEffect } from 'preact/hooks';
+import lazy from 'preact-lazy';
 
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';
 import { UserProfilePage } from '../../components/user_profile/UserProfilePage';
@@ -6,14 +7,15 @@ import { useFetch } from '../../hooks/use_fetch';
 import { useInfiniteFetch } from '../../hooks/use_infinite_fetch';
 import { fetchJSON } from '../../utils/fetchers';
 
-const NotFoundContainer = React.lazy(() => import('../NotFoundContainer'));
+const Loading = () => <p>Loading...</p>
+const NotFoundContainer = lazy(() => import('../NotFoundContainer'), Loading);
 
 /** @type {React.VFC} */
 const UserProfileContainer = ({ username }) => {
   const { data: user, isLoading: isLoadingUser } = useFetch(`/api/v1/users/${username}`, fetchJSON);
   const { data: posts, fetchMore } = useInfiniteFetch(`/api/v1/users/${username}/posts`, fetchJSON);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoadingUser) {
       document.title = '読込中 - CAwitter'
     } else if (user !== null) {
@@ -22,7 +24,7 @@ const UserProfileContainer = ({ username }) => {
   }, [isLoadingUser, user])
 
   if (!isLoadingUser && user === null) {
-    return <React.Suspense fallback={<p></p>}><NotFoundContainer /></React.Suspense>;
+    return <NotFoundContainer />;
   }
 
   return (

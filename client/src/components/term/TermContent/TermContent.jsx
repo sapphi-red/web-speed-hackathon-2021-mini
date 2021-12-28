@@ -1,9 +1,9 @@
-import React from 'react';
+import { Fragment } from 'preact'
 
 /** @type {React.VFC} */
 const TermContent = () => {
   return (
-    <>
+    <Fragment>
       <h2 className="mb-2 mt-4 text-2xl font-bold">第5条（禁止事項）</h2>
       <p>ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
       <ol className="pl-8 list-decimal">
@@ -145,7 +145,7 @@ const TermContent = () => {
       </ol>
 
       <p className="text-right">以上</p>
-    </>
+    </Fragment>
   );
 };
 

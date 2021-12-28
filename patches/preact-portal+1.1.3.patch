@@ -1,0 +1,34 @@
+diff --git a/node_modules/preact-portal/dist/preact-portal.js b/node_modules/preact-portal/dist/preact-portal.js
+index 81a47d4..6642462 100644
+--- a/node_modules/preact-portal/dist/preact-portal.js
++++ b/node_modules/preact-portal/dist/preact-portal.js
+@@ -220,8 +220,9 @@ var PortalProxy = function (_Component2) {
+ 
+ 	PortalProxy.prototype.render = function render(_ref) {
+ 		var children = _ref.children;
++		var childrenArr = preact.toChildArray(children);
+ 
+-		return children && children[0] || null;
++		return childrenArr && childrenArr[0] || null;
+ 	};
+ 
+ 	return PortalProxy;
+diff --git a/node_modules/preact-portal/src/preact-portal.js b/node_modules/preact-portal/src/preact-portal.js
+index 642ab0d..72b301a 100644
+--- a/node_modules/preact-portal/src/preact-portal.js
++++ b/node_modules/preact-portal/src/preact-portal.js
+@@ -1,4 +1,4 @@
+-import { h, Component, render } from 'preact';
++import { h, Component, render, toChildArray } from 'preact';
+ 
+ /** Redirect rendering of descendants into the given CSS selector.
+  *  @example
+@@ -63,6 +63,7 @@ class PortalProxy extends Component {
+ 		return this.props.context;
+ 	}
+ 	render({ children }) {
+-		return children && children[0] || null;
++		const childrenArr = toChildArray(children)
++		return childrenArr && childrenArr[0] || null;
+ 	}
+ }

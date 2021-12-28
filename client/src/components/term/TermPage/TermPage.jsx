@@ -1,13 +1,15 @@
-import React from 'react';
+import { useState, useEffect, useRef } from 'preact/hooks';
+import lazy from 'preact-lazy';
 
-const TermContent = React.lazy(() => import('../TermContent'))
+const Loading = () => <p>Loading...</p>
+const TermContent = lazy(() => import('../TermContent'), Loading)
 
 /** @type {React.VFC} */
 const TermPage = () => {
-  const bottomRef = React.useRef(null)
-  const [showUnder, setShowUnder] = React.useState(false)
+  const bottomRef = useRef(null)
+  const [showUnder, setShowUnder] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setShowUnder(true)
@@ -81,9 +83,7 @@ const TermPage = () => {
 
       {
         showUnder
-          ? <React.Suspense fallback={<p>Loading...</p>}>
-              <TermContent />
-            </React.Suspense>
+          ? <TermContent />
           : null
       }
     </article>

@@ -1,0 +1,112 @@
+name: Metrics
+on:
+  workflow_dispatch:
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: index.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/
+          use_prebuilt_image: yes
+  user:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: user.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/users/mexicandraggle
+          use_prebuilt_image: yes
+  post-video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: post-video.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/posts/01EXS42Q9GYM0WGGKJBCS3DB05
+          use_prebuilt_image: yes
+  post-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: post-image.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/posts/01EXPWN7ECQ9FK6S88ZJYF0GF9
+          use_prebuilt_image: yes
+  post-music:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: post-music.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/posts/01EXRVDZC14NQ9ERH44CHV4RC3
+          use_prebuilt_image: yes
+  terms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: perf
+          # Options
+          filename: terms.svg
+          user: sapphi-red
+          base: ""
+          config_timezone: Asia/Tokyo
+          config_twemoji: yes
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_url: https://web-speed-hackathon-online-2021-mini2.sapphi.red/terms
+          use_prebuilt_image: yes
